@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, MessageSquare } from 'lucide-react';
+import { Menu, X, MessageSquare, Globe } from 'lucide-react';
 import logo from '../assets/images/logo.png';
 import { siteConfig } from '../config/site';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { lang, setLanguage, openModal, t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -21,10 +23,10 @@ export default function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: 'Beranda', href: '#hero' },
-    { name: 'Layanan Kami', href: '#layanan' },
-    { name: 'Tentang Kami', href: '#tentang' },
-    { name: 'Testimoni', href: '#testimoni' },
+    { name: t('navHome'), href: '#hero' },
+    { name: t('navServices'), href: '#layanan' },
+    { name: t('navAbout'), href: '#tentang' },
+    { name: t('navTestimonials'), href: '#testimoni' },
   ];
 
   return (
@@ -58,9 +60,9 @@ export default function Navbar() {
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => (
+            {navLinks.map((link, idx) => (
               <a
-                key={link.name}
+                key={idx}
                 href={link.href}
                 className="text-gray-300 hover:text-[#ff4d5e] text-sm font-semibold tracking-wide transition-colors duration-200"
               >
@@ -69,8 +71,20 @@ export default function Navbar() {
             ))}
           </div>
 
-          {/* Right Action: Chat Admin Button */}
+          {/* Right Action: Language Switcher & Chat Admin Button */}
           <div className="hidden md:flex items-center gap-4">
+            
+            {/* Language Switcher Button */}
+            <button
+              onClick={() => setLanguage(lang === 'id' ? 'en' : 'id')}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#181826] hover:bg-[#222235] border border-white/15 text-gray-300 hover:text-white text-xs font-bold transition-all"
+              title="Change Language / Ganti Bahasa"
+            >
+              <span>{lang === 'id' ? '🇮🇩 ID' : '🇬🇧 EN'}</span>
+              <Globe className="w-3.5 h-3.5 text-[#ff4d5e]" />
+            </button>
+
+            {/* Chat Admin Button */}
             <a
               href={siteConfig.getWaLink()}
               target="_blank"
@@ -78,12 +92,19 @@ export default function Navbar() {
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-[#ff4d5e] to-[#ff8577] text-white font-bold text-sm tracking-wide shadow-lg shadow-[#ff4d5e]/25 hover:shadow-[#ff4d5e]/40 hover:scale-105 active:scale-95 transition-all duration-200"
             >
               <MessageSquare className="w-4 h-4 fill-current" />
-              <span>Chat Admin</span>
+              <span>{t('chatAdmin')}</span>
             </a>
           </div>
 
-          {/* Mobile Hamburger Button */}
-          <div className="md:hidden flex items-center">
+          {/* Mobile Actions (Language Toggle + Hamburger Button) */}
+          <div className="md:hidden flex items-center gap-2">
+            <button
+              onClick={() => setLanguage(lang === 'id' ? 'en' : 'id')}
+              className="px-2.5 py-1.5 rounded-lg bg-[#181826] border border-white/15 text-xs font-bold text-gray-200"
+            >
+              {lang === 'id' ? '🇮🇩 ID' : '🇬🇧 EN'}
+            </button>
+
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="p-2 rounded-xl text-gray-300 hover:text-white hover:bg-white/10 transition-colors focus:outline-none"
@@ -98,9 +119,9 @@ export default function Navbar() {
       {/* Mobile Drawer Menu */}
       {isOpen && (
         <div className="md:hidden bg-[#0d0d14]/95 backdrop-blur-xl border-b border-white/10 px-4 pt-3 pb-6 space-y-3 animate-fadeIn">
-          {navLinks.map((link) => (
+          {navLinks.map((link, idx) => (
             <a
-              key={link.name}
+              key={idx}
               href={link.href}
               onClick={() => setIsOpen(false)}
               className="block px-4 py-3 rounded-xl text-gray-200 hover:text-white hover:bg-[#ff4d5e]/15 font-semibold text-base transition-all"
@@ -108,7 +129,15 @@ export default function Navbar() {
               {link.name}
             </a>
           ))}
-          <div className="pt-2 border-t border-white/10">
+          <div className="pt-2 border-t border-white/10 space-y-2">
+            <button
+              onClick={() => { openModal(); setIsOpen(false); }}
+              className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#181826] border border-white/15 text-gray-200 font-bold text-sm"
+            >
+              <Globe className="w-4 h-4 text-[#ff4d5e]" />
+              <span>Pilih Bahasa / Select Language ({lang.toUpperCase()})</span>
+            </button>
+
             <a
               href={siteConfig.getWaLink()}
               target="_blank"
@@ -117,7 +146,7 @@ export default function Navbar() {
               className="w-full flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-[#ff4d5e] to-[#ff8577] text-white font-bold text-center text-sm tracking-wide shadow-md shadow-[#ff4d5e]/30"
             >
               <MessageSquare className="w-4 h-4" />
-              <span>Chat Admin WhatsApp</span>
+              <span>{t('chatAdmin')} WhatsApp</span>
             </a>
           </div>
         </div>

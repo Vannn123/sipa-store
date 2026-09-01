@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import { testimonialsData } from '../data/testimonials';
 import { ShieldCheck, Maximize2, X, ArrowRight } from 'lucide-react';
 import { siteConfig } from '../config/site';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Testimonials() {
-  // State for active lightbox modal preview
+  const { t } = useLanguage();
   const [selectedImage, setSelectedImage] = useState(null);
 
   return (
@@ -19,13 +20,13 @@ export default function Testimonials() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
           <div className="inline-block px-3.5 py-1 rounded-full bg-[#ff4d5e]/10 border border-[#ff4d5e]/20 text-[#ff4d5e] text-xs font-bold uppercase tracking-wider">
-            Real Proof & Feedback
+            {t('testiBadge')}
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-            Testimoni <span className="text-gradient-red">Pelanggan Setia</span>
+            {t('testiTitle1')} <span className="text-gradient-red">{t('testiTitleGrad')}</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg">
-            Bukti nyata kejujuran & transaksi sukses setiap hari di Sipa Store. Klik gambar untuk melihat dalam ukuran penuh.
+            {t('testiSubtitle')}
           </p>
         </div>
 
@@ -76,7 +77,7 @@ export default function Testimonials() {
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl bg-[#181826] hover:bg-[#202033] border border-white/15 hover:border-[#ff4d5e]/40 text-white font-bold text-sm tracking-wide shadow-lg transition-all"
           >
-            <span>Lihat Ribuan Testimoni Lainnya di WhatsApp</span>
+            <span>{t('viewAllTesti')}</span>
             <ArrowRight className="w-4 h-4 text-[#ff4d5e]" />
           </a>
         </div>

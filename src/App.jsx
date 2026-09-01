@@ -5,30 +5,37 @@ import Services from './components/Services';
 import WhyChooseUs from './components/WhyChooseUs';
 import Testimonials from './components/Testimonials';
 import Footer from './components/Footer';
+import LanguageModal from './components/LanguageModal';
+import { LanguageProvider } from './context/LanguageContext';
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-[#0a0a0f] text-slate-100 selection:bg-[#ff4d5e] selection:text-white">
-      {/* 1. Navbar */}
-      <Navbar />
+    <LanguageProvider>
+      <div className="min-h-screen bg-[#0a0a0f] text-slate-100 selection:bg-[#ff4d5e] selection:text-white">
+        {/* Initial Language Selection Modal */}
+        <LanguageModal />
 
-      {/* Main Content Sections */}
-      <main>
-        {/* 2. Hero Section */}
-        <Hero />
+        {/* 1. Navbar */}
+        <Navbar />
 
-        {/* 3. Section "Layanan Kami" */}
-        <Services />
+        {/* Main Content Sections */}
+        <main>
+          {/* 2. Hero Section */}
+          <Hero />
 
-        {/* 4. Section "Mengapa Memilih Sipa Store?" */}
-        <WhyChooseUs />
+          {/* 3. Section "Layanan Kami" */}
+          <Services />
 
-        {/* 5. Section "Testimoni Pelanggan" */}
-        <Testimonials />
-      </main>
+          {/* 4. Section "Mengapa Memilih Sipa Store?" */}
+          <WhyChooseUs />
 
-      {/* 6. Footer */}
-      <Footer />
-    </div>
+          {/* 5. Section "Testimoni Pelanggan" */}
+          <Testimonials />
+        </main>
+
+        {/* 6. Footer */}
+        <Footer />
+      </div>
+    </LanguageProvider>
   );
 }

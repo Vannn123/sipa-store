@@ -1,28 +1,31 @@
 import React from 'react';
 import { ShieldCheck, Zap, Tag, Clock } from 'lucide-react';
 import whyChooseUsImg from '../assets/images/why-choose-us.png';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function WhyChooseUs() {
+  const { t } = useLanguage();
+
   const advantages = [
     {
       icon: ShieldCheck,
-      title: 'Keamanan Terjamin 100%',
-      description: 'Setiap transaksi diproses secara transparan & legal dengan reputasi terpercaya tanpa risiko banned.'
+      title: t('adv1Title'),
+      description: t('adv1Desc')
     },
     {
       icon: Zap,
-      title: 'Proses Kilat 1-5 Menit',
-      description: 'Sistem pengiriman & konfirmasi otomatis super cepat, pesanan langsung masuk dalam hitungan detik.'
+      title: t('adv2Title'),
+      description: t('adv2Desc')
     },
     {
       icon: Tag,
-      title: 'Harga Paling Kompetitif',
-      description: 'Dapatkan rate terbaik untuk jual beli DL/BGL Growtopia, pulsa convert, serta aplikasi premium murah.'
+      title: t('adv3Title'),
+      description: t('adv3Desc')
     },
     {
       icon: Clock,
-      title: 'Layanan Non-Stop 24/7',
-      description: 'Customer service & admin siap melayani kebutuhan transaksi kamu kapan saja tanpa batasan waktu.'
+      title: t('adv4Title'),
+      description: t('adv4Desc')
     }
   ];
 
@@ -76,14 +79,14 @@ export default function WhyChooseUs() {
             
             <div className="space-y-4">
               <div className="inline-block px-3.5 py-1 rounded-full bg-[#ff4d5e]/10 border border-[#ff4d5e]/20 text-[#ff4d5e] text-xs font-bold uppercase tracking-wider">
-                Keunggulan Utama
+                {t('whyBadge')}
               </div>
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight leading-tight">
-                Mengapa Memilih <br />
-                <span className="text-gradient-red">Sipa Store?</span>
+                {t('whyTitle1')} <br />
+                <span className="text-gradient-red">{t('whyTitleGrad')}</span>
               </h2>
               <p className="text-gray-400 text-base leading-relaxed">
-                Kami berkomitmen memberikan keamanan terbaik, kecepatan transaksi instan, serta kenyamanan bagi setiap pelanggan.
+                {t('whySubtitle')}
               </p>
             </div>
 

@@ -2,8 +2,11 @@ import React from 'react';
 import { ArrowDownRight, MessageSquare, ShieldCheck, Zap } from 'lucide-react';
 import logo from '../assets/images/logo.png';
 import { siteConfig } from '../config/site';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Hero() {
+  const { t } = useLanguage();
+
   return (
     <section id="hero" className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-radial-hero">
       {/* Background Decorative Ambient Lights */}
@@ -20,19 +23,19 @@ export default function Hero() {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#181826]/90 border border-[#ff4d5e]/30 shadow-inner">
               <span className="text-[#ff4d5e] font-bold text-xs sm:text-sm animate-soft-pulse">⚡</span>
               <span className="text-gray-200 text-xs sm:text-sm font-semibold tracking-wide">
-                Official Sipa Store — Safe, Fast & Trusted 24/7
+                {t('heroBadge')}
               </span>
             </div>
 
             {/* Main Headline */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight leading-[1.15] text-white">
-              Pusat Layanan Game & <br className="hidden sm:inline" />
-              <span className="text-gradient-red">Digital Top Up</span> Terpercaya
+              {t('heroHeadline1')} <br className="hidden sm:inline" />
+              <span className="text-gradient-red">{t('heroHeadlineGrad')}</span> {t('heroHeadline2')}
             </h1>
 
             {/* Paragraph Description */}
             <p className="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-              Solusi transaksi serbaguna game Growtopia (DL & BGL), aplikasi streaming premium, convert pulsa & PayPal/Crypto, jasa perantara rekber, hingga pembayaran QRIS serbaguna dengan proses kilat & garansi 100%.
+              {t('heroDesc')}
             </p>
 
             {/* CTA Buttons */}
@@ -41,7 +44,7 @@ export default function Hero() {
                 href="#layanan"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-[#ff4d5e] to-[#ff8577] text-white font-extrabold text-base tracking-wide shadow-lg shadow-[#ff4d5e]/30 hover:shadow-[#ff4d5e]/50 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200"
               >
-                <span>LIHAT LAYANAN</span>
+                <span>{t('btnViewServices')}</span>
                 <ArrowDownRight className="w-5 h-5" />
               </a>
 
@@ -52,7 +55,7 @@ export default function Hero() {
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 rounded-xl bg-[#12121a] hover:bg-[#181826] text-white font-bold text-base tracking-wide border border-white/15 hover:border-[#ff4d5e]/50 hover:-translate-y-0.5 transition-all duration-200"
               >
                 <MessageSquare className="w-5 h-5 text-[#ff4d5e]" />
-                <span>HUBUNGI ADMIN</span>
+                <span>{t('btnContactAdmin')}</span>
               </a>
             </div>
 
@@ -60,15 +63,15 @@ export default function Hero() {
             <div className="pt-6 border-t border-white/10 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0">
               <div className="flex flex-col items-center lg:items-start">
                 <span className="text-xl sm:text-2xl font-black text-white">5,000+</span>
-                <span className="text-xs text-gray-400 font-medium">Transaksi Sukses</span>
+                <span className="text-xs text-gray-400 font-medium">{t('statTrades')}</span>
               </div>
               <div className="flex flex-col items-center lg:items-start">
                 <span className="text-xl sm:text-2xl font-black text-white">100%</span>
-                <span className="text-xs text-gray-400 font-medium">Garansi Safe</span>
+                <span className="text-xs text-gray-400 font-medium">{t('statGuarantee')}</span>
               </div>
               <div className="flex flex-col items-center lg:items-start">
                 <span className="text-xl sm:text-2xl font-black text-white">24/7</span>
-                <span className="text-xs text-gray-400 font-medium">Proses Instan</span>
+                <span className="text-xs text-gray-400 font-medium">{t('statSpeed')}</span>
               </div>
             </div>
 
@@ -84,12 +87,12 @@ export default function Hero() {
               {/* Decorative Floating Badges */}
               <div className="absolute -top-3 -left-3 z-20 bg-[#12121a]/90 backdrop-blur-md border border-white/15 px-3 py-2 rounded-xl shadow-xl flex items-center gap-2">
                 <Zap className="w-4 h-4 text-[#ff4d5e]" />
-                <span className="text-xs font-bold text-white">Proses 1-3 Menit</span>
+                <span className="text-xs font-bold text-white">{t('floatingSpeed')}</span>
               </div>
 
               <div className="absolute -bottom-3 -right-3 z-20 bg-[#12121a]/90 backdrop-blur-md border border-white/15 px-3 py-2 rounded-xl shadow-xl flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <span className="text-xs font-bold text-white">Terbukti Legal</span>
+                <span className="text-xs font-bold text-white">{t('floatingVerified')}</span>
               </div>
 
               {/* Main Glowing Circle Image */}

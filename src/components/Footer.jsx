@@ -2,8 +2,11 @@ import React from 'react';
 import logo from '../assets/images/logo.png';
 import { ShieldCheck, MessageSquare, Instagram } from 'lucide-react';
 import { siteConfig } from '../config/site';
+import { useLanguage } from '../context/LanguageContext';
 
 export default function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="bg-[#07070b] border-t border-white/10 text-gray-400 pt-12 pb-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -20,15 +23,15 @@ export default function Footer() {
             </div>
 
             <p className="text-xs sm:text-sm text-gray-300 font-bold tracking-wide uppercase">
-              SOLUSI KEBUTUHAN DIGITAL TERPERCAYA
+              {t('footerTagline')}
             </p>
 
             <p className="text-xs text-gray-400 leading-relaxed">
-              Pusat layanan top up game Growtopia (DL & BGL), aplikasi streaming premium, convert pulsa, convert PayPal/Crypto, serta jasa perantara (Rekber/Midman) teramanah sejak 2022.
+              {t('footerDesc')}
             </p>
           </div>
 
-          {/* Social Badges: WhatsApp & Instagram (Telegram Removed) */}
+          {/* Social Badges: WhatsApp & Instagram */}
           <div className="flex items-center gap-3">
             <a
               href={siteConfig.getWaLink()}
@@ -54,10 +57,10 @@ export default function Footer() {
 
         {/* Bottom Copyright Area */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500">
-          <p>© 2026 SIPA STORE. All rights reserved.</p>
+          <p>{t('copyright')}</p>
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5 text-gray-400 font-medium">
-              <ShieldCheck className="w-4 h-4 text-emerald-500" /> SSL Secured & Encrypted
+              <ShieldCheck className="w-4 h-4 text-emerald-500" /> {t('sslSecured')}
             </span>
           </div>
         </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import { servicesData } from '../data/services';
 import { Gem, Smartphone, ArrowRightLeft, Coins, ShieldCheck, QrCode, ArrowRight } from 'lucide-react';
 import { siteConfig } from '../config/site';
+import { useLanguage } from '../context/LanguageContext';
 
 // Icon mapper helper
 const iconComponents = {
@@ -14,6 +15,9 @@ const iconComponents = {
 };
 
 export default function Services() {
+  const { lang, t } = useLanguage();
+  const isEn = lang === 'en';
+
   return (
     <section id="layanan" className="py-20 md:py-28 bg-[#12121a] relative overflow-hidden border-t border-b border-white/5">
       
@@ -25,13 +29,13 @@ export default function Services() {
         {/* Section Header (Centered) */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
           <div className="inline-block px-3.5 py-1 rounded-full bg-[#ff4d5e]/10 border border-[#ff4d5e]/20 text-[#ff4d5e] text-xs font-bold uppercase tracking-wider">
-            Katalog Layanan
+            {t('servicesBadge')}
           </div>
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-            Layanan Kami di <span className="text-gradient-red">Sipa Store</span>
+            {t('servicesTitle')} <span className="text-gradient-red">Sipa Store</span>
           </h2>
           <p className="text-gray-400 text-base sm:text-lg">
-            Kami menyediakan berbagai keperluan digital & kebutuhan transaksi game terlengkap dengan pelayanan profesional & amanah.
+            {t('servicesSubtitle')}
           </p>
         </div>
 
@@ -39,6 +43,10 @@ export default function Services() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {servicesData.map((service) => {
             const IconComponent = iconComponents[service.iconName] || Gem;
+            const title = isEn ? service.titleEn : service.titleId;
+            const description = isEn ? service.descriptionEn : service.descriptionId;
+            const badge = isEn ? service.badgeEn : service.badgeId;
+
             return (
               <div
                 key={service.id}
@@ -50,19 +58,19 @@ export default function Services() {
                     <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-[#ff4d5e]/20 to-[#ff8577]/5 border border-[#ff4d5e]/30 flex items-center justify-center text-[#ff4d5e] group-hover:scale-110 group-hover:bg-[#ff4d5e] group-hover:text-white transition-all duration-300 shadow-md">
                       <IconComponent className="w-7 h-7 stroke-[2.2]" />
                     </div>
-                    {service.badge && (
+                    {badge && (
                       <span className="px-2.5 py-1 rounded-md bg-[#181826] border border-white/10 text-gray-300 text-[11px] font-bold tracking-wide">
-                        {service.badge}
+                        {badge}
                       </span>
                     )}
                   </div>
 
                   {/* Title & Description */}
                   <h3 className="text-xl font-bold text-white mb-3 group-hover:text-gradient-red transition-colors">
-                    {service.title}
+                    {title}
                   </h3>
                   <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                    {service.description}
+                    {description}
                   </p>
                 </div>
 
@@ -72,12 +80,12 @@ export default function Services() {
                     {service.tag}
                   </span>
                   <a
-                    href={siteConfig.getWaLink(`Halo Admin, saya tertarik dengan layanan ${service.title}`)}
+                    href={siteConfig.getWaLink(`Halo Admin, saya tertarik dengan layanan ${title}`)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 text-sm font-bold text-[#ff4d5e] hover:text-[#ff8577] transition-colors group/link"
                   >
-                    <span>LIHAT DETAIL</span>
+                    <span>{t('btnDetail')}</span>
                     <ArrowRight className="w-4 h-4 transform group-hover/link:translate-x-1 transition-transform" />
                   </a>
                 </div>
